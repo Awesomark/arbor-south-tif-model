@@ -1,0 +1,5 @@
+*.pdf
+*.png
+washtenaw_parcels_download
+mapwashtenaw_main.js
+.DS_Store

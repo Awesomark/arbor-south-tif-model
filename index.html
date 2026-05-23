@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brownfield TIF Tax Model</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="controls" aria-label="Model inputs">
+        <div class="brand">
+          <p>Brownfield TIF Model</p>
+          <h1>Tax break-even calculator</h1>
+        </div>
+
+        <div class="grid">
+          <label>
+            Base taxable value
+            <input id="baseTv" inputmode="decimal" value="$7,564,471" />
+          </label>
+          <label>
+            Input improvement value
+            <input id="improvementValue" inputmode="decimal" value="$473,632,450" />
+          </label>
+          <label>
+            Percent added to taxable value
+            <input id="taxablePercent" inputmode="decimal" value="100%" />
+          </label>
+          <label>
+            Millage rate
+            <input id="millage" type="number" min="0" step="0.0001" value="68.7887" />
+          </label>
+          <label>
+            Annual TV growth
+            <input id="growth" type="number" min="0" step="0.1" value="2.5" />
+          </label>
+          <label>
+            TIF capture years
+            <input id="tifYears" type="number" min="1" step="1" value="30" />
+          </label>
+          <label>
+            First tax year
+            <input id="firstYear" type="number" min="1900" step="1" value="2028" />
+          </label>
+        </div>
+        <p class="model-note">
+          Proposed TIF always uses the city's $473,632,450 improvement.
+          Brownfield taxes captured are calculated from the proposed city taxable-value schedule.
+          Input improvement taxable value added = input value x percent taxable / 2.
+        </p>
+      </section>
+
+      <section class="table-wrap" aria-label="Year by year tax model">
+        <table>
+          <thead>
+            <tr class="group-row">
+              <th class="row-header" colspan="2"></th>
+              <th colspan="3">No Improvement</th>
+              <th class="scenario-start" colspan="4">Proposed TIF</th>
+              <th class="scenario-start" colspan="3">Input Improvement</th>
+              <th class="scenario-start" colspan="2">Comparison</th>
+            </tr>
+            <tr>
+              <th class="row-header">Yr</th>
+              <th class="row-header">Cal</th>
+              <th>Taxable Value</th>
+              <th>Taxes</th>
+              <th>Cumulative Taxes</th>
+              <th class="scenario-start">Taxable Value</th>
+              <th>Taxes</th>
+              <th>Brownfield Taxes Captured</th>
+              <th>Cumulative Taxes</th>
+              <th class="scenario-start">Taxable Value</th>
+              <th>Taxes</th>
+              <th>Cumulative Taxes</th>
+              <th class="scenario-start">Proposed TIF - Input Improvement</th>
+              <th>Proposed TIF - Input Plus Brownfield Capture</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
