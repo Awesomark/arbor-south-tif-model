@@ -80,8 +80,7 @@ function calculate() {
   const growthRate = numberValue(inputs.growth) / 100;
   const tifYears = Math.max(1, Math.round(numberValue(inputs.tifYears, 30)));
   const firstYear = Math.round(numberValue(inputs.firstYear, 2028));
-  const proposedTifAddedTv = PROPOSED_TIF_IMPROVEMENT_VALUE / 2;
-  const proposedTifStartTv = baseTv + proposedTifAddedTv;
+  const proposedTifPostCaptureTv = PROPOSED_TIF_PROJECTED_TV[PROPOSED_TIF_PROJECTED_TV.length - 1];
   const inputImprovementAddedTv = (improvementValue * taxablePercent) / 2;
   const inputImprovementStartTv = baseTv + inputImprovementAddedTv;
 
@@ -94,13 +93,17 @@ function calculate() {
   for (let year = 1; year <= 75; year += 1) {
     const calendarYear = firstYear + year - 1;
     const growthMultiplier = (1 + growthRate) ** (year - 1);
+    const postCaptureGrowthMultiplier = (1 + growthRate) ** Math.max(0, year - tifYears - 1);
     const noImprovementTv = baseTv * growthMultiplier;
     const inputImprovementTv = inputImprovementStartTv * growthMultiplier;
-    const tifTv = year <= tifYears ? baseTv : proposedTifStartTv * growthMultiplier;
+    const tifTv =
+      year <= tifYears
+        ? baseTv
+        : proposedTifPostCaptureTv * postCaptureGrowthMultiplier;
     const proposedProjectTv =
       year <= PROPOSED_TIF_PROJECTED_TV.length
         ? PROPOSED_TIF_PROJECTED_TV[year - 1]
-        : proposedTifStartTv * growthMultiplier;
+        : proposedTifPostCaptureTv * postCaptureGrowthMultiplier;
 
     const tifTax = tifTv * millageRate;
     const noImprovementTax = noImprovementTv * millageRate;
