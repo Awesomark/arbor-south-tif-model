@@ -12,7 +12,8 @@ const output = {
   rows: document.getElementById("rows"),
 };
 
-const PROPOSED_TIF_IMPROVEMENT_VALUE = 473632450;
+const PROPOSED_TIF_IMPROVEMENT_VALUE = 406000000;
+const BROWNFIELD_CAPTURE_CAP = 345054904;
 const PROPOSED_TIF_PROJECTED_TV = [
   17249924, 52294350, 111299203, 140924185, 150432405, 151936729, 154975464,
   158074973, 161236472, 164461201, 167750425, 171105434, 174527543, 178018094,
@@ -108,7 +109,11 @@ function calculate() {
     const tifTax = tifTv * millageRate;
     const noImprovementTax = noImprovementTv * millageRate;
     const inputImprovementTax = inputImprovementTv * millageRate;
-    const brownfieldCaptured = year <= tifYears ? proposedProjectTv * millageRate : 0;
+    const uncappedBrownfieldCaptured = year <= tifYears ? proposedProjectTv * millageRate : 0;
+    const brownfieldCaptured = Math.min(
+      uncappedBrownfieldCaptured,
+      Math.max(0, BROWNFIELD_CAPTURE_CAP - cumulativeBrownfieldCaptured),
+    );
 
     cumulativeTif += tifTax;
     cumulativeBrownfieldCaptured += brownfieldCaptured;

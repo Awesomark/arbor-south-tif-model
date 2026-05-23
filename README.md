@@ -5,10 +5,10 @@ A static browser app for comparing taxable value and tax collection scenarios fo
 The model compares:
 
 - No improvement
-- Proposed TIF, using the city's fixed $473,632,450 improvement value
+- Proposed TIF, using the city's $406,000,000 proposed private investment and projected taxable-value schedule
 - User-entered input improvement
 
-Each scenario shows taxable value, annual taxes, and cumulative taxes over 75 years. The proposed TIF section also includes cumulative brownfield taxes captured using the city-proposed taxable-value schedule.
+Each scenario shows taxable value, annual taxes, and cumulative taxes over 75 years. The proposed TIF section also includes cumulative brownfield taxes captured using the city-proposed taxable-value schedule, capped at $345,054,904.
 
 ## Run locally
 
