@@ -14,6 +14,12 @@ const output = {
 
 const PROPOSED_TIF_IMPROVEMENT_VALUE = 406000000;
 const BROWNFIELD_CAPTURE_CAP = 345054904;
+const BROWNFIELD_TIF_TABLE_CAPTURE = [
+  589300, 2742379, 6367565, 8187685, 8771857, 8864280, 9050979, 9241407,
+  9435646, 9633765, 9835854, 10041982, 10252232, 10466684, 10685430, 10908548,
+  11136129, 11368264, 11605041, 11846548, 12092888, 12344157, 12600453,
+  12861874, 13128520, 14054835, 14345803, 14642585, 14945311, 15254085,
+];
 const PROPOSED_TIF_PROJECTED_TV = [
   17249924, 52294350, 111299203, 140924185, 150432405, 151936729, 154975464,
   158074973, 161236472, 164461201, 167750425, 171105434, 174527543, 178018094,
@@ -101,15 +107,11 @@ function calculate() {
       year <= tifYears
         ? baseTv
         : proposedTifPostCaptureTv * postCaptureGrowthMultiplier;
-    const proposedProjectTv =
-      year <= PROPOSED_TIF_PROJECTED_TV.length
-        ? PROPOSED_TIF_PROJECTED_TV[year - 1]
-        : proposedTifPostCaptureTv * postCaptureGrowthMultiplier;
-
     const tifTax = tifTv * millageRate;
     const noImprovementTax = noImprovementTv * millageRate;
     const inputImprovementTax = inputImprovementTv * millageRate;
-    const uncappedBrownfieldCaptured = year <= tifYears ? proposedProjectTv * millageRate : 0;
+    const uncappedBrownfieldCaptured =
+      year <= tifYears ? (BROWNFIELD_TIF_TABLE_CAPTURE[year - 1] ?? 0) : 0;
     const brownfieldCaptured = Math.min(
       uncappedBrownfieldCaptured,
       Math.max(0, BROWNFIELD_CAPTURE_CAP - cumulativeBrownfieldCaptured),

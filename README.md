@@ -8,7 +8,7 @@ The model compares:
 - Proposed TIF, using the city's $406,000,000 proposed private investment and projected taxable-value schedule
 - User-entered input improvement
 
-Each scenario shows taxable value, annual taxes, and cumulative taxes over 75 years. The proposed TIF section also includes cumulative brownfield taxes captured using the city-proposed taxable-value schedule, capped at $345,054,904.
+Each scenario shows taxable value, annual taxes, and cumulative taxes over 75 years. The proposed TIF section also includes cumulative brownfield taxes captured using the city's Table 3 reimbursement schedule, which assumes 2% taxable-value growth and remains capped at $345,054,904.
 
 ## Run locally
 
